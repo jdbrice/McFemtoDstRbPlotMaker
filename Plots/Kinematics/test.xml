@@ -1,0 +1,115 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<Task name="skimmer" type="VegaXmlPlotter" config="" nodePath="" />
+	<Plot name="MomentumResolution" >
+		<Histo name="mMuPtResRc" data="d" draw=" (McTracks[ Tracks.mMcIndex  ].mPt - Tracks.mPt) / (McTracks[ Tracks.mMcIndex  ].mPt) " select="Tracks.mMcIndex >= 0 && (McTracks[ Tracks.mMcIndex  ].mGeantPID == 5 || McTracks[ Tracks.mMcIndex  ].mGeantPID == 6)" bins_x="bins.ptRes">
+			<style optstat="1111" />
+		</Histo>
+	</Plot>
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600" name="MomentumResolution">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMuPtResRc" style="style.line" >
+				<style draw="" title="Momentum Resolution (Muons only); (p^{MC}_{T} - p^{RC}_{T})/(p^{MC}_{T});" linecolor="#0000FF" optstat="1111"/>
+			</Histo>
+
+			<Export url="MuPtRes.pdf" />
+			<Export url="MuPtRes.png" />
+		</Pad>
+	</Canvas> 
+
+	<Plot name="Momentum">
+		<!-- PT -->
+		<Histo name="mMupMcPt" data="d" draw="McTracks.mPt" select="McTracks.mGeantPID == 5" bins_x="bins.pt" style="style.line">
+			<style draw="" linecolor="#000000" xr="0, 10" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="mMupRcPt" data="d" draw="Tracks.mPt" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.pt" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMupMtdPt" data="d" draw="Tracks.mPt" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.pt" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Histo name="mMumMcPt" data="d" draw="McTracks.mPt" select="McTracks.mGeantPID == 6" bins_x="bins.pt" style="style.line">
+			<style draw="" linecolor="#000000" xr="0, 10" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="mMumRcPt" data="d" draw="Tracks.mPt" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.pt" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMumMtdPt" data="d" draw="Tracks.mPt" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.pt" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+
+		<Histo name="mMuPtResRc" data="d" draw=" (McTracks[ Tracks.mMcIndex  ].mPt - Tracks.mPt) / (McTracks[ Tracks.mMcIndex  ].mPt) " select="Tracks.mMcIndex >= 0 && (McTracks[ Tracks.mMcIndex  ].mGeantPID == 5 || McTracks[ Tracks.mMcIndex  ].mGeantPID == 5)" bins_x="bins.ptRes">
+		</Histo>
+
+		<Histo name="mMuPtResMtd" data="d" draw=" (McTracks[ Tracks.mMcIndex  ].mPt - Tracks.mPt) / (McTracks[ Tracks.mMcIndex  ].mPt) " select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && (McTracks[ Tracks.mMcIndex  ].mGeantPID == 5 || McTracks[ Tracks.mMcIndex  ].mGeantPID == 5)" bins_x="bins.ptRes">
+		</Histo>
+
+	</Plot>
+
+	<Plot name="daniel">
+		<Histo name="not much">
+		</Histo>
+	</Plot>
+
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600" name="Momentum">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMumMcPt" style="style.line" >
+				<style draw="" title="#mu-; p_{T}; dN/dp_{T}" />
+			</Histo>
+			<Histo name="mMumRcPt" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMumMtdPt" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMumMcPt" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumRcPt" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumMtdPt" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Pt_Mum.pdf" />
+			<Export url="Pt_Mum.png" />
+		</Pad>
+	</Canvas>
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMupMcPt" style="style.line" >
+				<style draw="" title="#mu+; p_{T}; dN/dp_{T}" />
+			</Histo>
+			<Histo name="mMupRcPt" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMupMtdPt" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMupMcPt" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupRcPt" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupMtdPt" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Pt_Mup.pdf" />
+			<Export url="Pt_Mup.png" />
+		</Pad>
+	</Canvas>
+
+</config>

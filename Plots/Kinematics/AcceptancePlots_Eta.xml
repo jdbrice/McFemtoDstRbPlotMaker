@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Plot>
+		<!-- ETA -->
+		<Histo name="mMupMcEta" data="d" draw="McTracks.mEta" select="McTracks.mGeantPID == 5" bins_x="bins.eta" style="style.line">
+			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 2e4"/>
+		</Histo>
+
+		<Histo name="mMupRcEta" data="d" draw="Tracks.mEta" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.eta" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMupMtdEta" data="d" draw="Tracks.mEta" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.eta" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Histo name="mMumMcEta" data="d" draw="McTracks.mEta" select="McTracks.mGeantPID == 6" bins_x="bins.eta" style="style.line">
+			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 2e4"/>
+		</Histo>
+
+		<Histo name="mMumRcEta" data="d" draw="Tracks.mEta" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.eta" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMumMtdEta" data="d" draw="Tracks.mEta" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.eta" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+	</Plot>
+	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMumMcEta" style="style.line" >
+				<style draw="" title="#mu-; #eta; dN/d#eta" />
+			</Histo>
+			<Histo name="mMumRcEta" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMumMtdEta" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMumMcEta" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumRcEta" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumMtdEta" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Eta_Mum.pdf" />
+			<Export url="Eta_Mum.png" />
+		</Pad>
+	</Canvas>
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMupMcEta" style="style.line" >
+				<style draw="" title="#mu+; #eta; dN/d#eta" />
+			</Histo>
+			<Histo name="mMupRcEta" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMupMtdEta" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMupMcEta" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupRcEta" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupMtdEta" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Eta_Mup.pdf" />
+			<Export url="Eta_Mup.png" />
+		</Pad>
+	</Canvas>
+
+</config>

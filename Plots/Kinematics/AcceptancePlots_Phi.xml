@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+	<Plot>
+		<!-- PHI -->
+		<Histo name="mMupMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 5" bins_x="bins.phi" style="style.line">
+			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="mMupRcPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.phi" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMupMtdPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.phi" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Histo name="mMumMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 6" bins_x="bins.phi" style="style.line">
+			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="mMumRcPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.phi" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="mMumMtdPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.phi" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+	</Plot>
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMupMcPhi" style="style.line" >
+				<style draw="" title="#mu+; #phi; dN/d#phi" />
+			</Histo>
+			<Histo name="mMupRcPhi" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMupMtdPhi" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMupMcPhi" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupRcPhi" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupMtdPhi" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Phi_Mup.pdf" />
+			<Export url="Phi_Mup.png" />
+		</Pad>
+	</Canvas>
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
+
+			<Histo name="mMumMcPhi" style="style.line" >
+				<style draw="" title="#mu-; #phi; dN/d#phi" />
+			</Histo>
+			<Histo name="mMumRcPhi" style="style.line" >
+				<style draw="same" />
+			</Histo>
+			<Histo name="mMumMtdPhi" style="style.line" >
+				<style draw="same" />
+			</Histo>
+
+			<Legend columns="3">
+				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
+				<Entry name="mMumMcPhi" title="MC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumRcPhi" title="RC" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumMtdPhi" title="MTD" opt="l" linewidth="4" markersize=""/>
+			</Legend>
+
+			<Export url="Phi_Mum.pdf" />
+			<Export url="Phi_Mum.png" />
+		</Pad>
+	</Canvas>
+
+</config>

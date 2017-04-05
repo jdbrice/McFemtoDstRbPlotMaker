@@ -1,0 +1,6 @@
+*.pdf
+*.png
+*.C
+.DS_Store
+*.lis
+*log

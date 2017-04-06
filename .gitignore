@@ -4,3 +4,6 @@
 .DS_Store
 *.lis
 *log
+
+compiled_config.xml
+config_dump.txt

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Logger globalLogLevel="info" url="debug.log"/>
+
+	<list>FemtoDst_EmbedBoth.lis</list>
+	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="-1" />
+	<TFile url="kink.root" />
+
+	<TCanvas width="1000" height="700" />
+
+	<Transform states="Phi, Eta">
+		<Draw save_as="pos_{state}" data="d" name="pos_{state}" draw="McTracks.m{state} - McTracks[McTracks.mParentIndex].m{state} : McTracks.mPt" select="McTracks.mParentIndex>=0 && McTracks.mGeantPID == 5 && McTracks[McTracks.mParentIndex].mGeantPID == 8" bins_x="bins.m{state}" bins_y="bins.mPt" />
+		<Draw save_as="neg_{state}" data="d" name="neg_{state}" draw="McTracks.m{state} - McTracks[McTracks.mParentIndex].m{state} : McTracks.mPt" select="McTracks.mParentIndex>=0 && McTracks.mGeantPID == 6 && McTracks[McTracks.mParentIndex].mGeantPID == 9" bins_x="bins.m{state}" bins_y="bins.mPt" />
+
+		<Draw save_as="abs_pos_{state}" data="d" name="abs_pos_{state}" draw="abs(McTracks.m{state} - McTracks[McTracks.mParentIndex].m{state}) : McTracks.mPt" select="McTracks.mParentIndex>=0 && McTracks.mGeantPID == 5 && McTracks[McTracks.mParentIndex].mGeantPID == 8" bins_x="bins.absm{state}" bins_y="bins.mPt" />
+		<Draw save_as="abs_neg_{state}" data="d" name="abs_neg_{state}" draw="abs(McTracks.m{state} - McTracks[McTracks.mParentIndex].m{state}) : McTracks.mPt" select="McTracks.mParentIndex>=0 && McTracks.mGeantPID == 6 && McTracks[McTracks.mParentIndex].mGeantPID == 9" bins_x="bins.absm{state}" bins_y="bins.mPt" />
+	</Transform>
+
+	<style>
+		<line optstat="0" linewidth="2" logy="1"/>
+	</style>
+	<bins>
+		<mPhi width="0.01" min="-4" max="4" />
+		<mEta width="0.01" min="-4" max="4" />
+
+		<absmPhi width="0.01" min="0" max="8" />
+		<absmEta width="0.01" min="0" max="8" />
+
+		<mPt width="0.1" min="0" max="5" />
+	</bins>
+
+</config>

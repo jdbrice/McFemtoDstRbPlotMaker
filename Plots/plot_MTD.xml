@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<TCanvas width="1000" height="700" />
+
+	<Data name="plc_5" url="mtd_gpid_5.root" />
+	<Data name="plc_6" url="mtd_gpid_6.root" />
+	<Data name="plc_8" url="mtd_gpid_8.root" />
+	<Data name="plc_9" url="mtd_gpid_9.root" />
+
+	<Include url="GeantNames.xml"/>
+
+	<TCanvas width="1000" height="700" />
+	<Margins> 0.02, 0.02, 0.1, 0.1</Margins>
+
+	<Transform states="DeltaY, DeltaZ">
+		<Add nameA="plc_5/mtd_5_{state}" nameB="plc_8/mtd_8_{state}" save_as="mtd_pos_{state}" />
+		<Add nameA="plc_6/mtd_6_{state}" nameB="plc_9/mtd_9_{state}" save_as="mtd_neg_{state}" />
+	</Transform>
+
+	<Info>
+		<DeltaY x="DeltaY (cm)" y="dN/dDeltaY" />
+		<DeltaZ x="DeltaZ (cm)" y="dN/dDeltaZ" />
+	</Info>
+
+	<PlotTemplate names="DeltaY, DeltaZ">
+		
+		<Histo name="mtd_pos_{name}" style="style.line"> <style draw="" linecolor="#000000" x="@Info.{name}:x" y="@Info.{name}:y"/>  </Histo>
+
+		<Histo name="plc_5/mtd_5_{name}" style="style.line"> <style draw="same" linecolor="#FF0000" />  </Histo>
+
+		<Histo name="plc_8/mtd_8_{name}" style="style.line"> <style draw="same" linecolor="#0000FF" />  </Histo>
+
+		<Legend columns="3">
+			<Position x1="0.59" x2="0.98" y1="0.89" y2="0.98" />
+			<Entry name="mtd_pos_{name}" title="Sum" opt="l" />
+			<Entry name="plc_5/mtd_5_{name}" title="@GeantNames.Name[5]" opt="l" />
+			<Entry name="plc_8/mtd_8_{name}" title="@GeantNames.Name[8]" opt="l" />
+		</Legend>
+
+		<Export url="Export/mtd_pos_{name}.pdf" />
+	</PlotTemplate>
+
+	<PlotTemplate names="DeltaY, DeltaZ">
+	
+		<Histo name="plc_8/mtd_8_{name}" style="style.line"> <style draw="" linecolor="#FF0000" x="@Info.{name}:x" y="@Info.{name}:y"/>  </Histo>
+
+		<Histo name="plc_9/mtd_9_{name}" style="style.line"> <style draw="same" linecolor="#0000FF" />  </Histo>
+
+		<Legend columns="2">
+			<Position x1="0.59" x2="0.98" y1="0.89" y2="0.98" />
+			<Entry name="plc_8/mtd_8_{name}" title="@GeantNames.Name[8]" opt="l" />
+			<Entry name="plc_9/mtd_9_{name}" title="@GeantNames.Name[9]" opt="l" />
+		</Legend>
+
+		<Export url="Export/mtd_pion_{name}.pdf" />
+	</PlotTemplate>
+
+	<PlotTemplate names="DeltaY, DeltaZ">
+
+		<Histo name="plc_5/mtd_5_{name}" style="style.line"> <style draw="" linecolor="#FF0000" x="@Info.{name}:x" y="@Info.{name}:y"/>  </Histo>
+		<Histo name="plc_6/mtd_6_{name}" style="style.line"> <style draw="same" linecolor="#0000FF" />  </Histo>
+
+		<Legend columns="2">
+			<Position x1="0.59" x2="0.98" y1="0.89" y2="0.98" />
+			<Entry name="plc_5/mtd_5_{name}" title="@GeantNames.Name[5]" opt="l" />
+			<Entry name="plc_6/mtd_6_{name}" title="@GeantNames.Name[6]" opt="l" />
+		</Legend>
+
+		<Export url="Export/mtd_muon_{name}.pdf" />
+	</PlotTemplate>
+
+
+	<style>
+		<line logy="1" optstat="0" linewidth="2"/>
+	</style>
+
+</config>

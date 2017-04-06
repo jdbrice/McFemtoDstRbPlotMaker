@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<GeantNames>
+		<Name></Name>
+		<Name>GAMMA</Name>
+		<Name>POSITRON</Name>
+		<Name>ELECTRON</Name>
+		<Name>NEUTRINO</Name>
+		<Name>MUON +</Name>
+		<Name>MUON -</Name>
+		<Name>PION 0 </Name>
+		<Name>PION +</Name>
+		<Name>PION -</Name>
+	</GeantNames>
+</config>

@@ -8,21 +8,10 @@
 
 	<embed>Muons</embed>
 
-	<plcA>5</plcA>
-	<plcB>6</plcB>
-	<Data name="hd" url="{embed}_pidA{plcA}_pidB{plcB}.root" />
+	<plc>5</plc>
+	<Data name="hd" url="kinematics_gpid_{plc}.root" />
 
-	<GeantNames>
-		<Name>GAMMA</Name>
-		<Name>POSITRON</Name>
-		<Name>ELECTRON</Name>
-		<Name>NEUTRINO</Name>
-		<Name>MUON +</Name>
-		<Name>MUON -</Name>
-		<Name>PION 0 </Name>
-		<Name>PION +</Name>
-		<Name>PION -</Name>
-	</GeantNames>
+	<Include url="../GeantNames.xml"/>
 
 
 	<prefix></prefix>
@@ -52,25 +41,58 @@
 
 
 	<PlotTemplate names="Pt, Eta, Phi">
-		<Histo name="hd/primaryPosMc{name}" style="style.line">
-			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" title="Primary" x="@Info.{name}:x" y="@Info.{name}:y"/>
+		<Histo name="hd/primary_{plc}_Mc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" x="@Info.{name}:x" y="@Info.{name}:y"/>
 		</Histo>
 
-		<Histo name="hd/primaryPosRc{name}" style="style.line">
+		<Histo name="hd/primary_{plc}_Rc{name}" style="style.line">
 			<style draw="same" linecolor="#0000FF" />
 		</Histo>
 
-		<Histo name="hd/primaryPosMtd{name}" style="style.line">
+		<Histo name="hd/primary_{plc}_Mtd{name}" style="style.line">
 			<style draw="same" linecolor="#FF0000" />
 		</Histo>
 
-		<TLatex x="0.2" y="0.90" text="Secondary" size="0.05"/>
-		<TLatex x="0.2" y="0.86" text="@GeantNames.Name[{plcA}]" size="0.05"/>
+		<TLatex x="0.15" y="0.90" text="Primary" size="0.05"/>
+		<TLatex x="0.15" y="0.86" text="@GeantNames.Name[{plc}]" size="0.05"/>
 
-		<Export url="Export/{prefix}primaryPos{name}.pdf" />
+		<Legend columns="3">
+			<Position x1="0.59" x2="0.98" y1="0.89" y2="0.98" />
+			<Entry name="hd/primary_{plc}_Mc{name}" title="MC" opt="l" />
+			<Entry name="hd/primary_{plc}_Rc{name}" title="RC" opt="l" />
+			<Entry name="hd/primary_{plc}_Mtd{name}" title="MTD" opt="l" />
+		</Legend>
+
+		<Export url="Export/{prefix}primary_{plc}_{name}.pdf" />
 	</PlotTemplate> 
 
 	<PlotTemplate names="Pt, Eta, Phi">
+		<Histo name="hd/secondary_{plc}_Mc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" x="@Info.{name}:x" y="@Info.{name}:y"/>
+		</Histo>
+
+		<Histo name="hd/secondary_{plc}_Rc{name}" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="hd/secondary_{plc}_Mtd{name}" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<TLatex x="0.15" y="0.90" text="Secondary" size="0.05"/>
+		<TLatex x="0.15" y="0.86" text="@GeantNames.Name[{plc}]" size="0.05"/>
+
+		<Legend columns="3">
+			<Position x1="0.59" x2="0.98" y1="0.89" y2="0.98" />
+			<Entry name="hd/secondary_{plc}_Mc{name}" title="MC" opt="l" />
+			<Entry name="hd/secondary_{plc}_Rc{name}" title="RC" opt="l" />
+			<Entry name="hd/secondary_{plc}_Mtd{name}" title="MTD" opt="l" />
+		</Legend>
+
+		<Export url="Export/{prefix}secondary_{plc}_{name}.pdf" />
+	</PlotTemplate> 
+
+	<!-- <PlotTemplate names="Pt, Eta, Phi">
 		<Histo name="hd/secondaryPosMc{name}" style="style.line">
 			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" x="@Info.{name}:x" y="@Info.{name}:y" />
 		</Histo>
@@ -84,7 +106,7 @@
 		</Histo>
 
 		<Export url="Export/{prefix}secondaryPos{name}.pdf" />
-	</PlotTemplate>
+	</PlotTemplate> -->
 
 	<style>
 		<line optstat="0" linewidth="2" logy="1"/>

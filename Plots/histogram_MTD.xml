@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Logger globalLogLevel="info" url="debug.log"/>
+
+	<list>FemtoDst_EmbedBoth.lis</list>
+	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="-1" />
+	<TFile url="mtd_gpid_{plc}.root" />
+
+	<TCanvas width="1000" height="700" />
+	
+
+	<plc>5</plc>
+
+	<!-- <Include url="MomentumResolution.xml" /> -->
+
+	<Transform states="DeltaY, DeltaZ">
+		<!-- <Draw save_as="mtd_{state}" data="d" name="mtd_{state}" draw="MtdPidTraits.m{state}" select="Tracks.mMcIndex >= 0" bins_x="bins.m{state}" /> -->
+		<Draw save_as="mtd_{plc}_{state}" data="d" name="mtd_{plc}_{state}" draw="MtdPidTraits[Tracks.mMtdPidTraitsIndex].m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[Tracks.mMcIndex].mGeantPID == {plc}" bins_x="bins.m{state}" />
+	</Transform>
+
+	<style>
+		<line optstat="0" linewidth="2" logy="1"/>
+	</style>
+	<bins>
+		<mDeltaY width="0.5" min="-100" max="100" />
+		<mDeltaZ width="0.5" min="-100" max="100" />
+	</bins>
+
+</config>

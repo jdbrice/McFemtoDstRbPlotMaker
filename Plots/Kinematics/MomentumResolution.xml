@@ -15,8 +15,9 @@
 				<style draw="" title="Momentum Resolution (Muons only); (p^{MC}_{T} - p^{RC}_{T})/(p^{MC}_{T});" linecolor="#0000FF" optstat="1111"/>
 			</Histo>
 
-			<Export url="MuPtRes.pdf" />
-			<Export url="MuPtRes.png" />
+			<Export url="Export/MuPtRes.pdf" />
+			<Export url="Export/MuPtRes.png" />
+			<Export url="Export/MuPtRes.C" />
 		</Pad>
 	</Canvas> 
 </config>

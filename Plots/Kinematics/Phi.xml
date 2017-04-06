@@ -3,9 +3,9 @@
 
 	<Plot>
 		<!-- PHI -->
-		<Histo name="mMupMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 5" bins_x="bins.phi" style="style.line">
-			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3"/>
-		</Histo>
+		<Histo name="mMupMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 5 && McTracks.mParentIndex < 0" bins_x="bins.phi" />
+		<Histo name="mMumMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 6 && McTracks.mParentIndex < 0" bins_x="bins.phi" />
+		
 
 		<Histo name="mMupRcPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 5" bins_x="bins.phi" style="style.line">
 			<style draw="same" linecolor="#0000FF" />
@@ -15,9 +15,7 @@
 			<style draw="same" linecolor="#FF0000" />
 		</Histo>
 
-		<Histo name="mMumMcPhi" data="d" draw="McTracks.mPhi" select="McTracks.mGeantPID == 6" bins_x="bins.phi" style="style.line">
-			<style draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3"/>
-		</Histo>
+		
 
 		<Histo name="mMumRcPhi" data="d" draw="Tracks.mPhi" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == 6" bins_x="bins.phi" style="style.line">
 			<style draw="same" linecolor="#0000FF" />
@@ -32,7 +30,7 @@
 		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
 
 			<Histo name="mMupMcPhi" style="style.line" >
-				<style draw="" title="#mu+; #phi; dN/d#phi" />
+				<style draw="" title="#mu+; #phi; dN/d#phi" draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3" />
 			</Histo>
 			<Histo name="mMupRcPhi" style="style.line" >
 				<style draw="same" />
@@ -45,13 +43,14 @@
 
 			<Legend columns="3">
 				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
-				<Entry name="mMupMcPhi" title="MC" opt="l" linewidth="4" markersize=""/>
-				<Entry name="mMupRcPhi" title="RC" opt="l" linewidth="4" markersize=""/>
-				<Entry name="mMupMtdPhi" title="MTD" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMupMcPhi" title="MC" opt="l" />
+				<Entry name="mMupRcPhi" title="RC" opt="l" />
+				<Entry name="mMupMtdPhi" title="MTD" opt="l" />
 			</Legend>
 
-			<Export url="Phi_Mup.pdf" />
-			<Export url="Phi_Mup.png" />
+			<Export url="Export/Phi_Mup.pdf" />
+			<Export url="Export/Phi_Mup.png" />
+			<Export url="Export/Phi_Mup.C" />
 		</Pad>
 	</Canvas>
 
@@ -59,7 +58,7 @@
 		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
 
 			<Histo name="mMumMcPhi" style="style.line" >
-				<style draw="" title="#mu-; #phi; dN/d#phi" />
+				<style draw="" title="#mu-; #phi; dN/d#phi" draw="" linecolor="#000000" xr="-4, 4" yr="1, 8e3" />
 			</Histo>
 			<Histo name="mMumRcPhi" style="style.line" >
 				<style draw="same" />
@@ -70,13 +69,14 @@
 
 			<Legend columns="3">
 				<Position x1="0.59" x2="0.99" y1="0.89" y2="0.99" />
-				<Entry name="mMumMcPhi" title="MC" opt="l" linewidth="4" markersize=""/>
-				<Entry name="mMumRcPhi" title="RC" opt="l" linewidth="4" markersize=""/>
-				<Entry name="mMumMtdPhi" title="MTD" opt="l" linewidth="4" markersize=""/>
+				<Entry name="mMumMcPhi" title="MC" opt="l" />
+				<Entry name="mMumRcPhi" title="RC" opt="l" />
+				<Entry name="mMumMtdPhi" title="MTD" opt="l" />
 			</Legend>
 
-			<Export url="Phi_Mum.pdf" />
-			<Export url="Phi_Mum.png" />
+			<Export url="Export/Phi_Mum.pdf" />
+			<Export url="Export/Phi_Mum.png" />
+			<Export url="Export/Phi_Mum.C" />
 		</Pad>
 	</Canvas>
 

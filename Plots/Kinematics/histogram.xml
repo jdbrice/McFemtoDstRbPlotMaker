@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Logger globalLogLevel="info" url="debug.log"/>
+
+	<list>FemtoDst_EmbedPions.lis</list>
+	<Task name="skimmer" type="VegaXmlPlotter" config="" nodePath="" />
+	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="-1" />
+
+	<TCanvas width="1000" height="700" />
+
+	<embed>Muons</embed>
+	<TFile url="{embed}_pidA{plcA}_pidB{plcB}.root" />
+
+	<plcA>5</plcA>
+	<plcB>6</plcB>
+
+	<Include url="MomentumResolution.xml" />
+
+	<Transform states="Pt, Eta, Phi">
+		<Draw save_as="primaryPosMc{state}"  name="primaryPosMc{state}" data="d" draw="McTracks.m{state}" select="McTracks.mGeantPID == {plcA} && McTracks.mParentIndex < 0" bins_x="bins.m{state}" />
+		<Draw save_as="primaryPosRc{state}"  name="primaryPosRc{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcA} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" bins_x="bins.m{state}" />
+		<Draw save_as="primaryPosMtd{state}" name="primaryPosMtd{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcA} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" bins_x="bins.m{state}" />
+
+		<Draw save_as="secondaryPosMc{state}"  name="secondaryPosMc{state}" data="d" draw="McTracks.m{state}" select="McTracks.mGeantPID == {plcA} && McTracks.mParentIndex >= 0" bins_x="bins.m{state}" />
+		<Draw save_as="secondaryPosRc{state}"  name="secondaryPosRc{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcA} && McTracks[ Tracks.mMcIndex  ].mParentIndex >= 0" bins_x="bins.m{state}" />
+		<Draw save_as="secondaryPosMtd{state}" name="secondaryPosMtd{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcA} && McTracks[ Tracks.mMcIndex  ].mParentIndex >= 0" bins_x="bins.m{state}" />
+
+		<Draw save_as="primaryNegMc{state}"  name="primaryNegMc{state}" data="d" draw="McTracks.m{state}" select="McTracks.mGeantPID == {plcB} && McTracks.mParentIndex < 0" bins_x="bins.m{state}" />
+		<Draw save_as="primaryNegRc{state}"  name="primaryNegRc{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcB} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" bins_x="bins.m{state}" />
+		<Draw save_as="primaryNegMtd{state}" name="primaryNegMtd{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcB} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" bins_x="bins.m{state}" />
+
+		<Draw save_as="secondaryNegMc{state}"  name="secondaryNegMc{state}" data="d" draw="McTracks.m{state}" select="McTracks.mGeantPID == {plcB} && McTracks.mParentIndex >= 0" bins_x="bins.m{state}" />
+		<Draw save_as="secondaryNegRc{state}"  name="secondaryNegRc{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= -1 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcB} && McTracks[ Tracks.mMcIndex  ].mParentIndex >= 0" bins_x="bins.m{state}" />
+		<Draw save_as="secondaryNegMtd{state}" name="secondaryNegMtd{state}" data="d" draw="Tracks.m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {plcB} && McTracks[ Tracks.mMcIndex  ].mParentIndex >= 0" bins_x="bins.m{state}" />
+	</Transform>
+
+	<XRange>
+		<Pt>0, 10</Pt>
+		<Eta>-4, 4</Eta>
+		<Phi>-4, 4</Phi>
+	</XRange>
+
+	<!-- <PlotTemplate names="Pt, Eta, Phi">
+		<Histo name="primaryPosMc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@XRange.{name}" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="primaryPosRc{name}" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="primaryPosMtd{name}" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Export url="Export/primaryPos{name}.pdf" />
+	</PlotTemplate>
+
+	<PlotTemplate names="Pt, Eta, Phi">
+		<Histo name="secondaryPosMc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@XRange.{name}" yr="1, 8e3"/>
+		</Histo>
+
+		<Histo name="secondaryPosRc{name}" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="secondaryPosMtd{name}" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Export url="Export/secondaryPos{name}.pdf" />
+	</PlotTemplate> -->
+
+	<style>
+		<line optstat="0" linewidth="2" logy="1"/>
+	</style>
+	<bins>
+		<mPhi width="0.01" min="-4" max="4" />
+		<mEta width="0.01" min="-2" max="2" />
+		<mPt  width="0.01" min="0" max="8" />
+		<ptRes width="0.005" min="-0.75" max="0.75" />
+	</bins>
+
+</config>

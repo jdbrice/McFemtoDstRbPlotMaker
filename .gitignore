@@ -4,6 +4,7 @@
 .DS_Store
 *.lis
 *log
+*.root
 
 compiled_config.xml
 config_dump.txt

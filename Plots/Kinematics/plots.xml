@@ -1,50 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<Logger globalLogLevel="info" url="debug.log"/>
 
-	<list>FemtoDst_EmbedPions.lis</list>
-	<Task name="skimmer" type="VegaXmlPlotter" config="" nodePath="" />
-	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="1" />
-
-
+	<in>Histo.root</in>
+	
 
 	<TCanvas width="1000" height="700" />
 
-	<!-- <Include url="AcceptancePlots_Phi.xml" /> -->
-	<!-- <Include url="AcceptancePlots_Eta.xml" /> -->
-	<!-- <Include url="AcceptancePlots_Pt.xml" /> -->
+	<embed>Muons</embed>
 
-	<!-- <OptStats x1="0.69" x2="0.99" y1="0.69" y2="0.89" />
+	<plcA>5</plcA>
+	<plcB>6</plcB>
+	<Data name="hd" url="{embed}_pidA{plcA}_pidB{plcB}.root" />
 
-	<Plot>
-		<Histo name="mMuPtResRc" data="d" draw=" (McTracks[ Tracks.mMcIndex  ].mPt - Tracks.mPt) / (McTracks[ Tracks.mMcIndex  ].mPt) " select="Tracks.mMcIndex >= 0 && (McTracks[ Tracks.mMcIndex  ].mGeantPID == 5 || McTracks[ Tracks.mMcIndex  ].mGeantPID == 6)" bins_x="bins.ptRes">
-			<style optstat="1111" />
-		</Histo>
-	</Plot>
+	<GeantNames>
+		<Name>GAMMA</Name>
+		<Name>POSITRON</Name>
+		<Name>ELECTRON</Name>
+		<Name>NEUTRINO</Name>
+		<Name>MUON +</Name>
+		<Name>MUON -</Name>
+		<Name>PION 0 </Name>
+		<Name>PION +</Name>
+		<Name>PION -</Name>
+	</GeantNames>
 
-	<Canvas n_coll="12" n_row="12" width="1000" height="600">
+
+	<prefix></prefix>
+
+	<Margins> 0.02, 0.02, 0.1, 0.1</Margins>
+	
+
+	<XRange>
+		<Pt>0, 10</Pt>
+		<Eta>-4, 4</Eta>
+		<Phi>-4, 4</Phi>
+	</XRange>
+
+	<Info>
+		<Pt  x="p_{T} (GeV/c)" y="dN/dp_{T} (GeV/c)^{-1}" xr="0, 10" />
+		<Eta x="#eta" y="dN/d#eta" xr="-2, 2" />
+		<Phi x="#phi" y="dN/d#phi" xr="-4, 4" />
+	</Info>
+	
+
+	<Canvas n_coll="12" n_row="12" width="1000" height="600" name="Momentum">
 		<Pad gx="0, 12" gy="0, 12" m="0.1" name="1" rm="0.01" tm="0.01">
 
-			<Histo name="mMuPtResRc" style="style.line" >
-				<style draw="" title="Momentum Resolution (Muons only); (p^{MC}_{T} - p^{RC}_{T})/(p^{MC}_{T});" linecolor="#0000FF" optstat="1111"/>
-			</Histo>
-
-			<Export url="MuPtRes.pdf" />
-			<Export url="MuPtRes.png" />
 		</Pad>
-	</Canvas> -->
+	</Canvas>
+	
 
-	<Include url="MomentumResolution.xml" />
-	<Include url="Momentum.xml"/>
 
+	<PlotTemplate names="Pt, Eta, Phi">
+		<Histo name="hd/primaryPosMc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" title="Primary" x="@Info.{name}:x" y="@Info.{name}:y"/>
+		</Histo>
+
+		<Histo name="hd/primaryPosRc{name}" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="hd/primaryPosMtd{name}" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<TLatex x="0.2" y="0.90" text="Secondary" size="0.05"/>
+		<TLatex x="0.2" y="0.86" text="@GeantNames.Name[{plcA}]" size="0.05"/>
+
+		<Export url="Export/{prefix}primaryPos{name}.pdf" />
+	</PlotTemplate> 
+
+	<PlotTemplate names="Pt, Eta, Phi">
+		<Histo name="hd/secondaryPosMc{name}" style="style.line">
+			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" x="@Info.{name}:x" y="@Info.{name}:y" />
+		</Histo>
+
+		<Histo name="hd/secondaryPosRc{name}" style="style.line">
+			<style draw="same" linecolor="#0000FF" />
+		</Histo>
+
+		<Histo name="hd/secondaryPosMtd{name}" style="style.line">
+			<style draw="same" linecolor="#FF0000" />
+		</Histo>
+
+		<Export url="Export/{prefix}secondaryPos{name}.pdf" />
+	</PlotTemplate>
 
 	<style>
 		<line optstat="0" linewidth="2" logy="1"/>
 	</style>
 	<bins>
-		<phi width="0.01" min="-4" max="4" />
-		<eta width="0.01" min="-2" max="2" />
-		<pt  width="0.01" min="0" max="8" />
+		<mPhi width="0.01" min="-4" max="4" />
+		<mEta width="0.01" min="-2" max="2" />
+		<mPt  width="0.01" min="0" max="8" />
 		<ptRes width="0.005" min="-0.75" max="0.75" />
 	</bins>
 

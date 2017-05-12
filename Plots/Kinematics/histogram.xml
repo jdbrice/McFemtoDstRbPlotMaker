@@ -2,7 +2,7 @@
 <config>
 	<Logger globalLogLevel="info" url="debug.log"/>
 
-	<list>FemtoDst_EmbedPions.lis</list>
+	<list>FemtoDst_EmbedBoth.lis</list>
 	<Task name="skimmer" type="VegaXmlPlotter" config="" nodePath="" />
 	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="-1" />
 

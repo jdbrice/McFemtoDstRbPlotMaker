@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<Logger globalLogLevel="info" url="debug.log"/>
+
+	<list>FemtoDst_EmbedBoth.lis</list>
+	<Data name="d" treeName="FemtoDst" url="{list}" maxFiles="-1" />
+	<TFile url="all_rc_tracks.root" />
+
+	<qacut>Tracks.mPt > 0.001</qacut>
+	<qapidcut>Tracks.mPt > 0.001 && Tracks.mNHitsDedx > 10</qapidcut>
+
+	<Transform states="mPt, mEta, mPhi, mNHitsFit, mNHitsMax, mNHitsDedx">
+		<Draw name="d/Tracks_{state}" draw="Tracks.{state}" bins_x="bins.{state}" select="@qacut"/>
+	</Transform>
+
+	<Transform>
+		<Draw name="d/Tracks_mDCA" draw="Tracks.mDCA / 1000.0" select="@qacut" bins_x="bins.mDCA" />
+		<Draw name="d/Tracks_mNSigmaElectron" draw="Tracks.mNSigmaElectron / 100.0" select="@qapidcut" bins_x="bins.mNSigma" />
+		<Draw name="d/Tracks_mNSigmaPion" draw="Tracks.mNSigmaPion / 100.0" select="@qapidcut" bins_x="bins.mNSigma" />
+		<Draw name="d/Tracks_mNSigmaKaon" draw="Tracks.mNSigmaKaon / 100.0" select="@qapidcut" bins_x="bins.mNSigma" />
+		<Draw name="d/Tracks_mNSigmaProton" draw="Tracks.mNSigmaProton / 100.0" select="@qapidcut" bins_x="bins.mNSigma" />
+
+		<Draw name="d/Tracks_mDedx" draw="Tracks.mDedx / 1000.0.0 " select="@qapidcut" bins_x="mDedx" />
+		<Draw name="d/Tracks_mDedx_mPt" draw="(Tracks.mPt * cosh( Tracks.mEta )) : Tracks.mDedx / 1000.0.0 " select="@qapidcut" bins_x="bins.mPt" bins_y="bins.mDedx" />
+	</Transform>
+
+	<style>
+		<line optstat="0" linewidth="2" logy="1"/>
+	</style>
+	<bins>
+		<mPt width="0.1" min="0" max="10" />
+		<mEta width="0.01" min="-4" max="4" />
+		<mPhi width="0.01" min="-4" max="4" />
+		<mNHitsFit width="1" min="-50" max="50" />
+		<mNHitsMax width="1" min="0" max="50" />
+		<mNHitsDedx width="1" min="0" max="50" />
+
+		<mDCA width="0.01" min="0" max="20" />
+		<mNSigma width="0.1" min="-10" max="10" />
+		<mDedx width="0.1" min="0" max="15" />
+
+	</bins>
+
+</config>

@@ -42,7 +42,7 @@
 
 	<PlotTemplate names="Pt, Eta, Phi">
 		<Histo name="hd/primary_{plc}_Mc{name}" style="style.line">
-			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" yr="1, 8e3" x="@Info.{name}:x" y="@Info.{name}:y"/>
+			<style draw="" linecolor="#000000" xr="@Info.{name}:xr" min="1" x="@Info.{name}:x" y="@Info.{name}:y"/>
 		</Histo>
 
 		<Histo name="hd/primary_{plc}_Rc{name}" style="style.line">

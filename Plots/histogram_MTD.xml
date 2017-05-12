@@ -15,7 +15,7 @@
 
 	<Transform states="DeltaY, DeltaZ">
 		<!-- <Draw save_as="mtd_{state}" data="d" name="mtd_{state}" draw="MtdPidTraits.m{state}" select="Tracks.mMcIndex >= 0" bins_x="bins.m{state}" /> -->
-		<Draw save_as="mtd_{plc}_{state}" data="d" name="mtd_{plc}_{state}" draw="MtdPidTraits[Tracks.mMtdPidTraitsIndex].m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[Tracks.mMcIndex].mGeantPID == {plc}" bins_x="bins.m{state}" />
+		<Draw save_as="mtd_{plc}_{state}" data="d" name="mtd_{plc}_{state}" draw="MtdPidTraits[Tracks.mMtdPidTraitsIndex].m{state}" select="Tracks.mMtdPidTraitsIndex >= 0 && Tracks.mMcIndex >= 0 && McTracks[Tracks.mMcIndex].mGeantPID == {plc} && ( (mMtdHitChan/60) < 7.0 || (mMtdHitChan/60) >= 24 || ( (mMtdHitChan/60)>=8.0 && (mMtdHitChan/60)<23.0 ) )" bins_x="bins.m{state}" />
 	</Transform>
 
 	<style>

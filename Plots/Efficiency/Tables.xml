@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <Data name="d" url="SL16j_RFF_muons_all.lis" treeName="FemtoDst" maxFiles="500000"/>
+    <TFile url="EfficiencyTables_{gid}.root"/>
+
+    <s mc="McTracks.mParentIndex < 0 && McTracks.mGeantPID == {gid}" rc="Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {gid} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" mtd="Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {gid} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0 && Tracks.mMtdPidTraitsIndex > 0" />
+
+    <!--1D tables  -->
+    <Transform states="mPt, mEta, mPhi" >
+        <Draw name="mc_{state}" data="d" draw="McTracks.{state}" select="{s:mc}" bins_x="bins.{state}" />
+        <Draw name="rc_{state}" data="d" draw="McTracks[Tracks.mMcIndex].{state}" select="{s:rc}" bins_x="bins.{state}" />
+        <Draw name="mtd_{state}" data="d" draw="McTracks[Tracks.mMcIndex].{state}" select="{s:mtd}" bins_x="bins.{state}" />
+    </Transform>
+
+    <!-- Eta vs. Phi  -->
+    <Transform>
+        <Draw name="mc_mEta_vs_mPhi" data="d" draw="McTracks.mEta : McTracks.mPhi" select="{s:mc}"  bins_y="bins.mEta" bins_x="bins.mPhi" />
+        <Draw name="rc_mEta_vs_mPhi" data="d" draw="McTracks[Tracks.mMcIndex].mEta : McTracks[Tracks.mMcIndex].mPhi" select="{s:rc}"  bins_y="bins.mEta" bins_x="bins.mPhi" />
+        <Draw name="mtd_mEta_vs_mPhi" data="d" draw="McTracks[Tracks.mMcIndex].mEta : McTracks[Tracks.mMcIndex].mPhi" select="{s:mtd}"  bins_y="bins.mEta" bins_x="bins.mPhi" />
+
+        <Draw name="mc_mPt_vs_mPhi" data="d" draw="McTracks.mPt : McTracks.mPhi" select="{s:mc}" bins_y="bins.mPt" bins_x="bins.mPhi" />
+        <Draw name="rc_mPt_vs_mPhi" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mPhi" select="{s:rc}" bins_y="bins.mPt" bins_x="bins.mPhi" />
+        <Draw name="mtd_mPt_vs_mPhi" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mPhi" select="{s:mtd}" bins_y="bins.mPt" bins_x="bins.mPhi" />
+
+        <Draw name="mc_mPt_vs_mEta" data="d" draw="McTracks.mPt : McTracks.mEta" select="{s:mc}" bins_y="bins.mPt" bins_x="bins.mEta" />
+        <Draw name="rc_mPt_vs_mEta" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mEta" select="{s:rc}" bins_y="bins.mPt" bins_x="bins.mEta" />
+        <Draw name="mtd_mPt_vs_mEta" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mEta" select="{s:mtd}" bins_y="bins.mPt" bins_x="bins.mEta" />
+    </Transform>
+
+    <Transform>
+        <Draw name="mc" data="d" draw="McTracks.mPt : McTracks.mEta : McTracks.mPhi" select="{s:mc}" bins_z="bins.mPt" bins_y="bins.mEta" bins_x="bins.mPhi" />
+        <Draw name="rc" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mEta : McTracks[Tracks.mMcIndex].mPhi" select="{s:rc}" bins_z="bins.mPt" bins_y="bins.mEta" bins_x="bins.mPhi" />
+        <Draw name="mtd" data="d" draw="McTracks[Tracks.mMcIndex].mPt : McTracks[Tracks.mMcIndex].mEta : McTracks[Tracks.mMcIndex].mPhi" select="{s:mtd}" bins_z="bins.mPt" bins_y="bins.mEta" bins_x="bins.mPhi" />
+    </Transform>
+
+    <Transform states="mPt, mEta, mPhi, mEta_vs_mPhi, mPt_vs_mPhi, mPt_vs_mEta">
+        <Divide save_as="rc_eff_{state}" nameA="rc_{state}" nameB="mc_{state}" />
+        <Divide save_as="mtd_eff_{state}" nameA="mtd_{state}" nameB="mc_{state}" />
+    </Transform>
+
+    <Transform>
+        <Divide save_as="rc_eff" nameA="rc" nameB="mc" />
+        <Divide save_as="mtd_eff" nameA="mtd" nameB="mc" />
+    </Transform>
+
+    <!-- <Transform states="mEta_vs_mPhi">
+        <Divide save_as="rc_eff_{state}" nameA="rc_{state}">
+    </Transform> -->
+
+
+
+    <bins>
+        <mPt>0.0, 0.8, 0.85, 0.9, 1.0, 1.1, 1.2,  1.3 ,  1.4 ,  1.5 ,  1.6 ,  1.7 , 1.8 ,  1.9 ,  2.  ,  2.25,  2.5 ,  2.75,  3. ,  4. , 5.,  6 </mPt>
+        <!-- <mPt width="0.05" min="0.0" max="5.0" /> -->
+        <mEta width="0.025" min="-0.8" max="0.8" />
+        <mPhi width="0.05" min="-3.3" max="3.3" />
+    </bins>
+
+
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <index>0</index>
+    <list></list>
+    <Data name="d" url="EfficiencyTables_{gid}.root"  />
+    <TFile url="Efficiency_{gid}.root"/>
+
+    <Transform states="mPt, mEta, mPhi, mEta_vs_mPhi, mPt_vs_mPhi, mPt_vs_mEta">
+        <Divide save_as="rc_eff_{state}" nameA="d/rc_{state}" nameB="d/mc_{state}" />
+        <Divide save_as="mtd_eff_{state}" nameA="d/mtd_{state}" nameB="d/mc_{state}" />
+    </Transform>
+
+    <Transform>
+        <Divide save_as="rc_eff" nameA="d/rc" nameB="d/mc" />
+        <Divide save_as="mtd_eff" nameA="d/mtd" nameB="d/mc" />
+    </Transform>
+
+</config>

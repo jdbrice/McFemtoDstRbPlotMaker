@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
 
-    <Data name="d" url="SL16j_RFF_muons_all.lis" treeName="FemtoDst" maxFiles="500000"/>
-    <TFile url="EfficiencyTables_{gid}.root"/>
+    <list></list>
+    <N>50000000</N>
+    <index>-1</index>
+    <Data name="d" url="{list}" treeName="FemtoDst" maxFiles="{N}" splitBy="50" index="{index}"/>
+    <TFile url="EfficiencyTables_{gid}_i{index}.root"/>
 
     <s mc="McTracks.mParentIndex < 0 && McTracks.mGeantPID == {gid}" rc="Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {gid} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0" mtd="Tracks.mMcIndex >= 0 && McTracks[ Tracks.mMcIndex  ].mGeantPID == {gid} && McTracks[ Tracks.mMcIndex  ].mParentIndex < 0 && Tracks.mMtdPidTraitsIndex > 0" />
 

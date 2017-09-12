@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <X>
+        <mPt> p_{T} (GeV/c) </mPt>
+        <mEta> #eta </mEta>
+        <mPhi> #phi </phi>
+    </X>
+    <Y>
+        <mPt> dN/dp_{T} (GeV/c)^{-1} </mPt>
+        <mEta> dN/d#eta </mEta>
+        <mPhi> dN/d#phi </phi>
+    </Y>
+    
+    <Data name="in" url="EfficiencyTables_{gid}.root"/>
+    <TFile url="StyledEfficiencyTable_{gid}.root" />
+    
+
+    <Transform states="mPt, mEta, mPhi">
+        <Clone name="in/mc_{state}" save_as="mc_{state}" setdir="false"/>
+        <Clone name="in/rc_{state}" save_as="rc_{state}" setdir="false"/>
+        <Clone name="in/mtd_{state}" save_as="mtd_{state}" setdir="false"/>
+    </Transform>
+
+    <Transform states="mPt, mEta, mPhi">
+        <Style name="mc_{state}" style="cstyle" >
+            <style title="MC" x="@X.{state}" y="@Y.{state}" lc="#000000"/>
+        </Style>
+
+        <Style name="rc_{state}" style="cstyle" >
+            <style title="RECO" x="@X.{state}" y="@Y.{state}" lc="#0000FF"/>
+        </Style>
+
+        <Style name="mtd_{state}" style="cstyle" >
+            <style title="MTD Matched" x="@X.{state}" y="@Y.{state}" lc="#FF0000" />
+        </Style>
+    </Transform>
+
+    <!-- 1D Efficiencies -->
+    <Transform states="mPt, mEta, mPhi">
+        <Clone name="in/rc_eff_{state}" save_as="rc_eff_{state}" setdir="false"/>
+        <Clone name="in/mtd_eff_{state}" save_as="mtd_eff_{state}" setdir="false"/>
+    </Transform>
+
+    <Transform states="mPt, mEta, mPhi">
+        <Style name="rc_eff_{state}" style="cstyle" >
+            <style title="RECO" x="@X.{state}" y="RECO / MC" lc="#0000FF"/>
+        </Style>
+
+        <Style name="mtd_eff_{state}" style="cstyle" >
+            <style title="MTD Matched" x="@X.{state}" y="MTD Matched / MC" lc="#FF0000" />
+        </Style>
+
+    </Transform>
+
+
+    <Transform>
+        <Clone name="in/mc_mEta_vs_mPhi" save_as="mc_mEta_vs_mPhi" setdir="false" />
+        <Clone name="in/rc_mEta_vs_mPhi" save_as="rc_mEta_vs_mPhi" setdir="false" />
+        <Clone name="in/mtd_mEta_vs_mPhi" save_as="mtd_mEta_vs_mPhi" setdir="false" />
+        
+        <Clone name="in/mc_mPt_vs_mPhi" save_as="mc_mPt_vs_mPhi" setdir="false" />
+        <Clone name="in/rc_mPt_vs_mPhi" save_as="rc_mPt_vs_mPhi" setdir="false" />
+        <Clone name="in/mtd_mPt_vs_mPhi" save_as="mtd_mPt_vs_mPhi" setdir="false" />
+        
+        <Clone name="in/mc_mPt_vs_mEta" save_as="mc_mPt_vs_mEta" setdir="false" />
+        <Clone name="in/rc_mPt_vs_mEta" save_as="rc_mPt_vs_mEta" setdir="false" />
+        <Clone name="in/mtd_mPt_vs_mEta" save_as="mtd_mPt_vs_mEta" setdir="false" />
+    </Transform>
+
+    <Transform>
+        <Style name="mc_mEta_vs_mPhi" style="cstyle2D">
+            <style title="MC" x="@X.mPhi" y="@X.mEta" />
+        </Style>
+        <Style name="rc_mEta_vs_mPhi" style="cstyle2D">
+            <style title="RECO" x="@X.mPhi" y="@X.mEta" />
+        </Style>
+        <Style name="mtd_mEta_vs_mPhi" style="cstyle2D">
+            <style title="MTD Matched" x="@X.mPhi" y="@X.mEta" />
+        </Style>
+
+        <Style name="mc_mPt_vs_mPhi" style="cstyle2D">
+            <style title="MC" x="@X.mPhi" y="@X.mPt" />
+        </Style>
+        <Style name="rc_mPt_vs_mPhi" style="cstyle2D">
+            <style title="RECO" x="@X.mPhi" y="@X.mPt" />
+        </Style>
+        <Style name="mtd_mPt_vs_mPhi" style="cstyle2D">
+            <style title="MTD Matched" x="@X.mPhi" y="@X.mPt" />
+        </Style>
+
+        <Style name="mc_mPt_vs_mEta" style="cstyle2D">
+            <style title="MC" x="@X.mEta" y="@X.mPt" />
+        </Style>
+        <Style name="rc_mPt_vs_mEta" style="cstyle2D">
+            <style title="RECO" x="@X.mEta" y="@X.mPt" />
+        </Style>
+        <Style name="mtd_mPt_vs_mEta" style="cstyle2D">
+            <style title="MTD Matched" x="@X.mEta" y="@X.mPt" />
+        </Style>
+    </Transform>
+
+
+
+    <Transform>
+        <Clone name="in/rc_eff_mEta_vs_mPhi" save_as="rc_eff_mEta_vs_mPhi" setdir="false" />
+        <Clone name="in/mtd_eff_mEta_vs_mPhi" save_as="mtd_eff_mEta_vs_mPhi" setdir="false" />
+        
+        <Clone name="in/rc_eff_mPt_vs_mPhi" save_as="rc_eff_mPt_vs_mPhi" setdir="false" />
+        <Clone name="in/mtd_eff_mPt_vs_mPhi" save_as="mtd_eff_mPt_vs_mPhi" setdir="false" />
+        
+        <Clone name="in/rc_eff_mPt_vs_mEta" save_as="rc_eff_mPt_vs_mEta" setdir="false" />
+        <Clone name="in/mtd_eff_mPt_vs_mEta" save_as="mtd_eff_mPt_vs_mEta" setdir="false" />
+    </Transform>
+
+    <Transform>
+        <Style name="rc_eff_mEta_vs_mPhi" style="cstyle2D">
+            <style title="RECO / MC" x="@X.mPhi" y="@X.mEta" />
+        </Style>
+        <Style name="mtd_eff_mEta_vs_mPhi" style="cstyle2D">
+            <style title="MTD Matched / MC" x="@X.mPhi" y="@X.mEta" />
+        </Style>
+
+        <Style name="rc_eff_mPt_vs_mPhi" style="cstyle2D">
+            <style title="RECO / MC" x="@X.mPhi" y="@X.mPt" />
+        </Style>
+        <Style name="mtd_eff_mPt_vs_mPhi" style="cstyle2D">
+            <style title="MTD Matched / MC" x="@X.mPhi" y="@X.mPt" />
+        </Style>
+
+        <Style name="rc_eff_mPt_vs_mEta" style="cstyle2D">
+            <style title="RECO / MC" x="@X.mEta" y="@X.mPt" />
+        </Style>
+        <Style name="mtd_eff_mPt_vs_mEta" style="cstyle2D">
+            <style title="MTD Matched / MC" x="@X.mEta" y="@X.mPt" />
+        </Style>
+    </Transform>
+
+
+
+
+    
+    <cstyle lw="2" />
+
+    
+
+</config>
